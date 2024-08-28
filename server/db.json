@@ -1,0 +1,124 @@
+{
+    "comments": [
+        {
+            "id": "1",
+            "name": "Juan Pérez",
+            "product": "Laptop",
+            "description": "Funciona perfectamente, el diseño es moderno y elegante."
+        },
+        {
+            "id": "2",
+            "name": "Ana Gómez",
+            "product": "Smartphone",
+            "description": "Buena relación calidad-precio, pero la batería dura poco."
+        },
+        {
+            "id": "3",
+            "name": "Carlos Méndez",
+            "product": "Auriculares",
+            "description": "Sonido nítido, aunque el cable es un poco frágil."
+        },
+        {
+            "id": "4",
+            "name": "Laura Torres",
+            "product": "Tablet",
+            "description": "Excelente para leer y ver videos, ligero y práctico."
+        },
+        {
+            "id": "5",
+            "name": "Pedro Fernández",
+            "product": "Cámara",
+            "description": "Fotos de alta calidad, aunque un poco pesada."
+        },
+        {
+            "id": "6",
+            "name": "Sofía Martínez",
+            "product": "Teclado",
+            "description": "Silencioso y cómodo para escribir, ideal para trabajar."
+        },
+        {
+            "id": "7",
+            "name": "María López",
+            "product": "Impresora",
+            "description": "Fácil de configurar, pero el cartucho se acaba rápido."
+        },
+        {
+            "id": "8",
+            "name": "Miguel Rojas",
+            "product": "Monitor",
+            "description": "Excelente resolución, perfecto para trabajos gráficos."
+        },
+        {
+            "id": "9",
+            "name": "Elena Castillo",
+            "product": "Mouse",
+            "description": "Preciso y ergonómico, el diseño se adapta a la mano."
+        },
+        {
+            "id": "10",
+            "name": "Diego Hernández",
+            "product": "Altavoz Bluetooth",
+            "description": "Buen sonido y fácil de transportar, ideal para fiestas."
+        },
+        {
+            "id": "11",
+            "name": "Valeria Ramírez",
+            "product": "Smartwatch",
+            "description": "Muchas funciones útiles, aunque la pantalla es pequeña."
+        },
+        {
+            "id": "12",
+            "name": "Javier Sánchez",
+            "product": "Router",
+            "description": "Buena conexión, pero a veces se desconecta solo."
+        },
+        {
+            "id": "13",
+            "name": "Clara Jiménez",
+            "product": "Smart TV",
+            "description": "Imagen clara y buena conectividad, fácil de usar."
+        },
+        {
+            "id": "14",
+            "name": "Roberto Ortiz",
+            "product": "Consola de videojuegos",
+            "description": "Excelente rendimiento, pero se calienta un poco."
+        },
+        {
+            "id": "15",
+            "name": "Paula Ruiz",
+            "product": "Bocina portátil",
+            "description": "Potente y duradera, ideal para exteriores."
+        },
+        {
+            "id": "16",
+            "name": "Luis Delgado",
+            "product": "Disco duro externo",
+            "description": "Rápido y con gran capacidad de almacenamiento."
+        },
+        {
+            "id": "17",
+            "name": "Gabriela Navarro",
+            "product": "Cargador inalámbrico",
+            "description": "Carga rápida, pero necesita estar bien alineado."
+        },
+        {
+            "id": "18",
+            "name": "Fernando Vega",
+            "product": "Reloj inteligente",
+            "description": "Funciones útiles, pero la batería podría durar más."
+        },
+        {
+            "id": "19",
+            "name": "Isabel Blanco",
+            "product": "Smart light",
+            "description": "Fácil de configurar y se sincroniza con la app."
+        },
+        {
+            "id": "20",
+            "name": "Rafael Campos",
+            "product": "Drone",
+            "description": "Divertido de usar, aunque un poco complicado al inicio."
+        }
+    ]
+}
