@@ -34,6 +34,7 @@ async function printComment() {
             <p>${comment.name}</p>
             <p>${comment.product}</p>
             <p>${comment.description}</p>
+            <button onclick = "deleteComment(${comment.id})">Delete</button>
         </li>`
     })
 }
@@ -47,8 +48,14 @@ async function updateComment(params) {
 
 
 // 2º DELETE - DELETE
-async function deleteComment(params) {
-    
+async function deleteComment(id) {
+    const response = await fetch(API_URL + `/${id}`, {
+        method: 'DELETE',
+        headers: {"Content-Type": "application/json"},
+    })
+
+    const deletedComment = await response.json()
+    return deletedComment
 }
 
 
