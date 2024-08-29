@@ -1,18 +1,6 @@
 {
   "comments": [
     {
-      "id": "2",
-      "name": "Ana Gómez",
-      "product": "Smartphone",
-      "description": "Buena relación calidad-precio, pero la batería dura poco."
-    },
-    {
-      "id": "3",
-      "name": "Carlos Méndez",
-      "product": "Auriculares",
-      "description": "Sonido nítido, aunque el cable es un poco frágil."
-    },
-    {
       "id": "4",
       "name": "Laura Torres",
       "product": "Tablet",
