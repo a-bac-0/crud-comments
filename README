@@ -1,0 +1,17 @@
+# Comentarios CRUD
+
+Este proyecto es una aplicación web simple para gestionar comentarios de usuarios sobre productos utilizando las operaciones CRUD (Crear, Leer, Actualizar, Eliminar) con una API simulada usando un archivo JSON local (`db.json`).
+
+## Tecnologías Utilizadas
+
+- **HTML5**: Estructura básica de la página.
+- **CSS**: Para la presentación y estilos de la página.
+- **JavaScript**: Para manejar la lógica del CRUD y las interacciones con la API.
+- **JSON Server**: Simula una API REST para manejar los comentarios almacenados en `db.json`.
+
+## Estructura del Proyecto
+
+- `index.html`: Contiene la estructura HTML de la página principal, con un formulario para agregar nuevos comentarios y una lista para mostrar los comentarios existentes.
+- `styles.css`: Archivo de estilos para dar formato a la página.
+- `services.js`: Archivo JavaScript que maneja todas las operaciones CRUD utilizando `fetch` para interactuar con la API simulada.
+- `db.json`: Archivo de base de datos JSON que actúa como la fuente de datos para los comentarios.
