@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./src/styles.css">
-    <title>Document</title>
+    <title>Comentarios</title>
 </head>
 <body>
-    <section id="commentsSection">
-        <h1>Share your review</h1>
-        <form action="" id="addNewComment">
-            <button onclick ="createNewComment()">New comment</button>
-            <input type="text" placeholder="Alias" name ="name" required>
-            <input type="text" placeholder="Your purchase" name ="product" required>
-            <input type="text" placeholder="Tell us more" name ="description" required>
-
-    </form>
-        <ul id="commentsList">
-
-        </ul>
-
+    <h1>Deja tu comentario</h1>
+    <section>
+        <form id="updateCommentForm" style="margin-top: 20px;">
+            <input type="text" name="name" placeholder="Alias" required />
+            <input type="text" name="product" placeholder="Product" required />
+            <input type="text" name="description" placeholder="Description" required />
+            <button type="button" id="saveCommentButton">Save</button>
+          </form>
     </section>
 
-    <script src="src/services.js"></script>
+    <h2>Lista de comentarios</h2>
+    <ul id="commentsList">
+        <!-- Espacio dónde se renderizan los comentarios -->
+    </ul>
+
+    <script src="./src/services.js"></script>
 </body>
 </html>
