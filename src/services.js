@@ -1,168 +1,161 @@
-// * por orden de dificultad
-
-// 1º READ - GET
-// 2º DELETE - DELETE
-// 3º CREATE - POST
-// 4º UPDATE - PUT
-
-const API_URL = "http://localhost:3000/comments"
-
-// * los invertimos para formar CRUD ---NO ES NECESARIO--
-// 3º CREATE - POST
-
-// 
-
-async function createComment() {
-    // Obtenemos el formulario
-    const form = document.getElementById('addNewComment');
-    if (!form) {
-        console.error("Formulario 'addNewComment' no encontrado");
-        return;
-    }
-
-    // Obtenemos los valores de los campos
-    const product_data = document.getElementsByName('product')[0]?.value; // Aseguramos el acceso con "?."
-    const newComment = {
-        name: form.name.value.trim(),
-        product: product_data?.trim(),
-        description: form.description.value.trim(),
-    };
-
-    // Validamos los campos: si alguno está vacío, mostramos alerta
-    if (!newComment.name || !newComment.product || !newComment.description) {
-        return alert("All fields are required");
-    }
-
-    try {
-        // Enviamos el comentario al servidor
-        const response = await fetch(API_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(newComment),
-        });
-
-        if (response.ok) {
-            alert("Comment created successfully!");
-            printComments(); // Refresca la lista de comentarios
-            form.reset(); // Limpia el formulario
-        } else {
-            console.error("Error al crear el comentario:", response.statusText);
-        }
-    } catch (error) {
-        console.error("Error al realizar la solicitud:", error);
-    }
-}
+const API_URL = "http://localhost:3000/comments";
+const form = document.getElementById("form");
+const listTag = document.getElementById("commentsList");
+let currentEditingCommentId = null;
 
 
-// 1º READ - GET
+
+//GET
+
 async function getAllComments() {
-    try {
-        const response = await fetch(API_URL, {
-            method: 'GET',
-            headers: { "Content-Type": "application/json" },
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json(); // transforma los datos a JSON
-        return data;
-    } catch (error) {
-        console.error("Error al obtener los comentarios:", error);
-        return []; // Retorna un arreglo vacío en caso de error
+  try {
+    const response = await fetch(API_URL, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch comments');
     }
-}
-
-const listTag = document.getElementById('commentsList');
-
-// Verifica si el elemento existe en el DOM
-if (!listTag) {
-    console.error("Elemento 'commentsList' no encontrado en el DOM");
-}
-
-// 1.0 PRINT ---SE REUTILIZA MÁS ADELANTE
-
-function loadCommentData(commentId, name, product, description) {
-   
-    const form = document.getElementById("updateCommentForm");
-    form.name.value = name;
-    form.product.value = product;
-    form.description.value = description;
-  
-    const saveButton = document.getElementById("saveCommentButton");
-    saveButton.onclick = () => updateComment(commentId);
+    
+    return response.json();
+  } catch (error) {
+    console.error("Error fetching comments:", error);
+    return [];
   }
+}
+
+
+//se usa más adelante
 
 async function printComments() {
-    const comments = await getAllComments();
-    const commentsList = document.getElementById("commentsList");
+  const comments = await getAllComments();
+  listTag.innerHTML = "";
   
-    commentsList.innerHTML = ""; // Limpia la lista antes de renderizar
-  
-    comments.forEach((comment) => {
-      commentsList.innerHTML += `
-        <li id="comment-${comment.id}">
-          <p><strong>${comment.name}</strong></p>
-          <p>${comment.product}</p>
-          <p>${comment.description}</p>
-          <button onclick="loadCommentData(${comment.id}, '${comment.name}', '${comment.product}', '${comment.description}')">Edit</button>
-          <button onclick="deleteComment(${comment.id})">Delete</button>
-        </li>
-      `;
+  comments.forEach((comment) => {
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <p><strong>${comment.name}</strong></p>
+      <p>${comment.product}</p>
+      <p>${comment.description}</p>
+      <button class="edit-btn">Edit</button>
+      <button class="delete-btn">Delete</button>
+    `;
+    
+    // Cambia el botón
+    li.querySelector('.edit-btn').addEventListener('click', () => {
+      currentEditingCommentId = comment.id;
+      form.name.value = comment.name;
+      form.product.value = comment.product;
+      form.description.value = comment.description;
+      
+      const submitButton = form.querySelector('button');
+      submitButton.textContent = 'Update Comment';
     });
+    
+    // Delete button event listener
+    li.querySelector('.delete-btn').addEventListener('click', () => deleteComment(comment.id));
+    
+    listTag.appendChild(li);
+  });
+}
+
+
+//CREATE -
+
+async function createComment(event) {
+  event.preventDefault();
+  
+  const newComment = {
+    name: form.name.value.trim(),
+    product: form.product.value.trim(),
+    description: form.description.value.trim(),
+  };
+
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newComment),
+    });
+
+    if (response.ok) {
+      form.reset();
+      await printComments();
+    } else {
+      console.error("Error creating comment:", response.statusText);
+    }
+  } catch (error) {
+    console.error("Network error:", error);
   }
-
-printComments()
-
-// 4º UPDATE - PUT
-async function updateComment(commentId) {
-    const form = document.getElementById("updateCommentForm");
-  
-    const updatedComment = {
-      name: form.name.value.trim(),
-      product: form.product.value.trim(),
-      description: form.description.value.trim(),
-    };
-  
-    if (!updatedComment.name || !updatedComment.product || !updatedComment.description) {
-      return alert("All fields are required");
-    }
-  
-    try {
-      const response = await fetch(`${API_URL}/${commentId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedComment),
-      });
-  
-      if (response.ok) {
-        alert("Comment updated successfully!");
-        printComments(); // Refresca la lista de comentarios
-        form.reset(); // Limpia el formulario después de la edición
-      } else {
-        console.error("Error al actualizar el comentario:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error al actualizar el comentario:", error);
-    }
-  }
-
-// 2º DELETE - DELETE
-async function deleteComment(id) {
-    const response = await fetch(API_URL + `/${id}`, {
-        method: 'DELETE',
-        headers: {"Content-Type": "application/json"},
-    })
-
-    const deletedComment = await response.json()
-
-    if(response.ok) {
-        printComments() //para refrescar después de eliminar
-    }
-
-    return deletedComment
 }
 
 
 
+//UPDATE-EDIT ...P
+
+async function updateComment(event) {
+  event.preventDefault();
+  
+  if (!currentEditingCommentId) return;
+
+  const updatedComment = {
+    name: form.name.value.trim(),
+    product: form.product.value.trim(),
+    description: form.description.value.trim(),
+  };
+
+  try {
+    const response = await fetch(`${API_URL}/${currentEditingCommentId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedComment),
+    });
+
+    if (response.ok) {
+      form.reset();
+      currentEditingCommentId = null;
+      const submitButton = form.querySelector('button');
+      submitButton.textContent = 'Add Comment';
+      await printComments();
+    } else {
+      console.error("Error updating comment:", response.statusText);
+    }
+  } catch (error) {
+    console.error("Network error during update:", error);
+  }
+}
+
+
+//DELETE
+
+
+async function deleteComment(id) {
+  try {
+    const response = await fetch(`${API_URL}/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (response.ok) {
+      await printComments();
+    } else {
+      console.error("Error deleting comment:", response.statusText);
+    }
+  } catch (error) {
+    console.error("Network error:", error);
+  }
+}
+
+// Pendiente de lo que recibe
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  
+  if (currentEditingCommentId) {
+    updateComment(event);
+  } else {
+    createComment(event);
+  }
+});
+
+printComments();

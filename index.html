@@ -9,17 +9,17 @@
 <body>
     <h1>Deja tu comentario</h1>
     <section>
-        <form id="updateCommentForm" style="margin-top: 20px;">
-            <input type="text" name="name" placeholder="Alias" required />
-            <input type="text" name="product" placeholder="Product" required />
-            <input type="text" name="description" placeholder="Description" required />
-            <button type="button" id="saveCommentButton">Save</button>
-          </form>
+        <form id="form">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="text" name="product" placeholder="Product" required>
+            <textarea name="description" placeholder="Description" required></textarea>
+            <button type="submit">Add Comment</button>
+        </form>
     </section>
 
     <h2>Lista de comentarios</h2>
     <ul id="commentsList">
-        <!-- Espacio dónde se renderizan los comentarios -->
+        <!-- Comments will be rendered here -->
     </ul>
 
     <script src="./src/services.js"></script>
